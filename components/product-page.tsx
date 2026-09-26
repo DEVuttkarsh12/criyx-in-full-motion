@@ -1,4 +1,7 @@
+'use client';
+
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from 'lucide-react';
+import PpHeader from '@/components/pp-header';
 import { getProduct, neighbours, products } from '@/lib/products';
 
 const discoveryCall = 'https://cal.com/criyx.ai/discovery-call';
@@ -21,22 +24,12 @@ export default function ProductPage({ slug }: { slug: string }) {
 
   return (
     <>
-      <header className="pp-top">
-        <a className="brand-lockup" href="/" aria-label="Criyx home">
-          <span className="brand-icon" aria-hidden="true" />
-          <span>criyx</span>
-        </a>
-        <nav aria-label="Product pages">
-          <a href="/#products">All products</a>
-          <a className="pp-cta" href={discoveryCall} target="_blank" rel="noreferrer">
-            Book a call <ArrowUpRight size={14} />
-          </a>
-        </nav>
-      </header>
+      <PpHeader />
 
       <main className="pp">
         <section className="pp-hero">
           <div className="pp-shell">
+            <p className="pp-crumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#products">Products</a><span aria-hidden="true">/</span><span>{product.name}</span></p>
             <p className="pp-eyebrow">{product.category.toUpperCase()} / {position}</p>
             <h1>{product.name}</h1>
             <p className="pp-line">{product.line}</p>
@@ -57,8 +50,8 @@ export default function ProductPage({ slug }: { slug: string }) {
           <div className="pp-shell">
             <p className="pp-eyebrow">WHAT&apos;S INSIDE</p>
             <ul>
-              {product.features.map(feature => (
-                <li key={feature}><Check size={17} />{feature}</li>
+              {product.features.map((feature, index) => (
+                <li key={feature}><span className="pp-feat-num">{String(index + 1).padStart(2, '0')}</span><Check size={17} />{feature}</li>
               ))}
             </ul>
           </div>
@@ -68,6 +61,19 @@ export default function ProductPage({ slug }: { slug: string }) {
           <div className="pp-shell">
             <p className="pp-eyebrow">THE OUTCOME</p>
             <p className="pp-outcome-line">{product.outcome}</p>
+          </div>
+        </section>
+
+        <section className="pp-ctaband">
+          <div className="pp-shell">
+            <h2>Want this working<br />for your business?</h2>
+            <p>Bring us the workflow slowing you down — we will map the fastest route to value.</p>
+            <div className="pp-actions">
+              <a className="pp-primary" href={discoveryCall} target="_blank" rel="noreferrer">
+                Book a discovery call <ArrowUpRight size={16} />
+              </a>
+              <a className="pp-mail" href={contactEmail}>info@criyx.com <ArrowRight size={15} /></a>
+            </div>
           </div>
         </section>
 
@@ -83,16 +89,20 @@ export default function ProductPage({ slug }: { slug: string }) {
         </nav>
       </main>
 
-      <footer className="pp-foot">
-        <a className="brand-lockup" href="/" aria-label="Criyx home">
-          <span className="brand-icon" aria-hidden="true" />
-          <span>criyx</span>
-        </a>
-        <div>
-          <a href={contactEmail}>info@criyx.com <ArrowUpRight size={13} /></a>
-          <a href={discoveryCall} target="_blank" rel="noreferrer">Book a call <ArrowUpRight size={13} /></a>
+      <footer className="site-footer">
+        <div className="footer-main">
+          <div><a className="brand-lockup" href="/" aria-label="Criyx home"><span className="brand-icon" aria-hidden="true" /><span>criyx</span></a><p>AI automation + custom software<br />for intelligent operations.</p></div>
+          <nav aria-label="Footer navigation">
+            <span>EXPLORE</span>
+            <a href="/#products">Products</a>
+            <a href="/#work">Solutions</a>
+            <a href="/#approach">Approach</a>
+            <a href="/#about">About</a>
+          </nav>
+          <div className="footer-contact"><span>START A CONVERSATION</span><a href={contactEmail}>info@criyx.com <ArrowUpRight /></a><a href={discoveryCall} target="_blank" rel="noreferrer">Book a call <ArrowUpRight /></a></div>
+          <a className="back-to-top" href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Back to top <ArrowUpRight /></a>
         </div>
-        <span>© 2026 CRIYX PRIVATE LIMITED</span>
+        <div className="footer-bottom"><span>© 2026 CRIYX PRIVATE LIMITED</span><span>PANCHKULA, HARYANA, INDIA</span><span>INTELLIGENCE, WITH INTENTION.</span></div>
       </footer>
     </>
   );

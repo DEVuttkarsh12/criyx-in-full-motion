@@ -15,7 +15,7 @@ The visual direction is minimal, editorial, precise, and premium. Keep generous 
 The homepage is composed in `app/page.tsx`:
 
 1. Fixed navigation with desktop and mobile states.
-2. Hero: “Intelligence, put to work.”
+2. Hero: “Your business. In full flow.” (retuned 26 Sept 2026 for a premium read; loader still says “Intelligence, put to work.”)
 3. Flow convergence section (`id="systems"`): dark “from chaos to flow” visual with pain-point pills, converging lines, central Criyx logo, and three outcome cards. (Replaced the old product index on 25 Sept 2026 — see §12.)
 4. Industry solutions: real estate, jewellery, and healthcare/services.
 5. About Criyx.
@@ -229,3 +229,10 @@ Where we left off: hero refinements done, old product index replaced, dev server
 - Fix: `vinext build --prerender-all` statically prerenders all 10 routes (verified `○ Static`), and new `scripts/assemble-static.mjs` merges `dist/client` + `dist/server/prerendered-routes/*.html` into `dist/static/` (`index.html`, `products/*.html`, `404.html` + assets). New `npm run build:vercel` runs both.
 - New `vercel.json`: `framework: null`, build `npm run build:vercel`, output `dist/static`, `cleanUrls: true` (maps `/products/voice-agents` → `voice-agents.html`).
 - Verified locally: full pipeline exit 0; served `dist/static` over HTTP — `/` 200, product HTML 200 with correct title, images + hashed CSS/JS resolve. Push to `main` auto-redeploys on Vercel.
+
+## 19. Checkpoint — 26 September 2026 (odometer number, full product pages, premium hero)
+
+- Showcase spotlight number is now a scroll-driven odometer: rows observed at viewport center drive the digit strip (smooth roll 01→09 both directions), hover still drives the photo preview; `aria-live` announces changes; reduced-motion shows instant swaps.
+- Product pages rebuilt as proper pages (`components/product-page.tsx` + new `components/pp-header.tsx`): same fixed transparent-then-blurred navbar as home (desktop + mobile menu with Escape), breadcrumb, hero with photo, numbered “What’s inside” features, outcome banner, CTA band, prev/next pager, full homepage-style footer with `/#` links. Dead `.pp-top` CSS removed.
+- Hero copy retuned: “Your business. In full flow.” + “AI agents, connected automation and custom software — designed around how your business actually works.” (`app/page.tsx`).
+- Verified in rendered HTML: new hero copy on `/`, header/menu/breadcrumb/CTA band/numbered features/footer on `/products/seo-agent`; `tsc --noEmit` passes.

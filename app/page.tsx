@@ -237,8 +237,8 @@ export default function Home() {
           <RippleDistortion className="hero-ripple-layer" brushSize={112} strength={1.35} rings={3.5} spread={4.5} fade={2.45} spacing={34} />
           <div className="hero-shell">
             <div className="hero-copy">
-              <h1 id="hero-heading" className="hero-enter hero-enter-2">Intelligence, put to work.</h1>
-              <p className="hero-lede hero-enter hero-enter-3">AI agents, connected automation and custom software—thoughtfully built around your business.</p>
+              <h1 id="hero-heading" className="hero-enter hero-enter-2">Your business. In full flow.</h1>
+              <p className="hero-lede hero-enter hero-enter-3">AI agents, connected automation and custom software — designed around how your business actually works.</p>
               <div className="hero-actions hero-enter hero-enter-4">
                 <a className="hero-primary" href="#contact">Let’s talk <ArrowUpRight size={16} aria-hidden="true" /></a>
                 <a className="hero-secondary" href="#products">Explore the products <ArrowRight size={15} aria-hidden="true" /></a>

@@ -33,6 +33,25 @@ export default function ProductShowcase() {
   }, []);
 
   useEffect(() => {
+    const rows = [...(sectionRef.current?.querySelectorAll<HTMLElement>('.pl-row') ?? [])];
+    if (!rows.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const spotter = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = rows.indexOf(entry.target as HTMLElement);
+            if (index >= 0) setCurrent(index);
+          }
+        });
+      },
+      { rootMargin: '-38% 0px -52% 0px', threshold: 0 },
+    );
+    rows.forEach(row => spotter.observe(row));
+    return () => spotter.disconnect();
+  }, []);
+
+  useEffect(() => {
     const list = listRef.current;
     const preview = previewRef.current;
     if (!list || !preview) return;
@@ -88,9 +107,15 @@ export default function ProductShowcase() {
 
         <span className="pl-giant" aria-hidden="true">FLOW</span>
         <div className="pl-layout">
-        <aside className="pl-side pl-reveal">
+        <aside className="pl-side pl-reveal" aria-live="polite">
+          <span className="pl-bigno-view" aria-hidden="true">
+            <span className="pl-bigno-strip" style={{ transform: `translateY(-${current}em)` }}>
+              {products.map((product, index) => (
+                <span key={product.slug}>{String(index + 1).padStart(2, '0')}</span>
+              ))}
+            </span>
+          </span>
           <div key={current} className="pl-swap">
-            <span className="pl-bigno">{String(current + 1).padStart(2, '0')}</span>
             <span className="pl-sidecat">{products[current].category}</span>
             <p className="pl-sideline">{products[current].line}</p>
           </div>
