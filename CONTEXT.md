@@ -217,3 +217,8 @@ Where we left off: hero refinements done, old product index replaced, dev server
 - Nine static product routes `app/products/<slug>/page.tsx` sharing `components/product-page.tsx` + `app/product-page.css` (loaded from root layout): sticky mini-nav, hero with photo, “What’s inside” features, outcome banner, prev/next product pager (full 1→9→1 loop), mini footer, per-page metadata. Plain `<a>` used (no `next` package installed, so no `next/link`).
 - Homepage “Products” links (desktop/mobile/footer nav, hero CTA + scroll cue) now point to `#products`; header scroll trigger still uses `#systems`.
 - Verified: `tsc --noEmit` passes; all 10 routes return HTTP 200; `/products/voice-agents` HTML confirmed server-rendered with correct content, title, and CSS.
+
+## 17. Checkpoint — 26 September 2026 (spotlight index polish + first GitHub push)
+
+- Third section elevated: sticky spotlight panel (giant outlined number, category, tagline that swap with an animation as you hover/focus rows) beside the index rows, plus a giant outlined “FLOW” backdrop word. Reduced-motion guard added for the swap animation.
+- First push to GitHub done: local git initialised on `main`, commit `6fd2169`, pushed to `https://github.com/DEVuttkarsh12/criyx-in-full-motion` (was an empty repo). 133 files; `node_modules`, build output and env files excluded via `.gitignore`. Local dev server: restart with `npm run dev -- --host 127.0.0.1 --port 5174` if `http://127.0.0.1:5174` stops responding.
