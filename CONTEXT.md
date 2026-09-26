@@ -222,3 +222,10 @@ Where we left off: hero refinements done, old product index replaced, dev server
 
 - Third section elevated: sticky spotlight panel (giant outlined number, category, tagline that swap with an animation as you hover/focus rows) beside the index rows, plus a giant outlined “FLOW” backdrop word. Reduced-motion guard added for the swap animation.
 - First push to GitHub done: local git initialised on `main`, commit `6fd2169`, pushed to `https://github.com/DEVuttkarsh12/criyx-in-full-motion` (was an empty repo). 133 files; `node_modules`, build output and env files excluded via `.gitignore`. Local dev server: restart with `npm run dev -- --host 127.0.0.1 --port 5174` if `http://127.0.0.1:5174` stops responding.
+
+## 18. Checkpoint — 26 September 2026 (Vercel 404 fix)
+
+- Symptom: `criyx-in-full-motion.vercel.app` showed Vercel `404 NOT_FOUND`. Cause: the repo is a vinext/Vite + Cloudflare-Workers app, not Next.js — `vinext build` emits only client assets + a Worker (`dist/client`, `dist/server`) with zero servable HTML, so Vercel had nothing to serve.
+- Fix: `vinext build --prerender-all` statically prerenders all 10 routes (verified `○ Static`), and new `scripts/assemble-static.mjs` merges `dist/client` + `dist/server/prerendered-routes/*.html` into `dist/static/` (`index.html`, `products/*.html`, `404.html` + assets). New `npm run build:vercel` runs both.
+- New `vercel.json`: `framework: null`, build `npm run build:vercel`, output `dist/static`, `cleanUrls: true` (maps `/products/voice-agents` → `voice-agents.html`).
+- Verified locally: full pipeline exit 0; served `dist/static` over HTTP — `/` 200, product HTML 200 with correct title, images + hashed CSS/JS resolve. Push to `main` auto-redeploys on Vercel.

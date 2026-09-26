@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vinext build",
+    "build:vercel": "vinext build --prerender-all && node scripts/assemble-static.mjs",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",
     "format": "oxfmt"
