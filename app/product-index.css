@@ -1,0 +1,33 @@
+.product-index { background: #edf2f3; color: #142a39; overflow: clip; scroll-margin-top: 72px; }
+.pi-shell { width: min(1420px, calc(100% - 9vw)); margin: 0 auto; padding: clamp(84px, 10vw, 142px) 0 clamp(92px, 10vw, 145px); }
+.pi-heading { display: flex; align-items: center; justify-content: space-between; margin: 0; padding-bottom: 18px; color: #42677c; font: 500 11px/1.4 var(--font-geist-mono), monospace; letter-spacing: .12em; }
+.pi-heading svg { color: #5d8498; }
+.pi-list { list-style: none; margin: 0; padding: 0; }
+.pi-row { position: relative; display: grid; grid-template-columns: clamp(50px, 5.4vw, 92px) minmax(0, 1fr) 90px; align-items: center; min-height: clamp(106px, 9.7vw, 146px); border-top: 1px solid #bfcdd2; opacity: 0; transform: translateY(25px); transition: opacity .7s ease, transform .75s cubic-bezier(.2,.72,.2,1); }
+.pi-row:last-child { border-bottom: 1px solid #bfcdd2; }
+.pi-row.is-visible { opacity: 1; transform: translateY(0); }
+.pi-row::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 1px; content: ''; background: #326d8d; transform: scaleX(0); transform-origin: left; transition: transform .55s cubic-bezier(.22,.7,.2,1); }
+.pi-row:hover::after { transform: scaleX(1); }
+.pi-number { align-self: center; color: #6f8b99; font: 400 12px var(--font-geist-mono), monospace; font-variant-numeric: tabular-nums; }
+.pi-name { display: block; width: fit-content; color: #152c3a; font: 400 clamp(42px, 5.6vw, 83px)/.98 var(--font-geist), Arial, sans-serif; letter-spacing: -.067em; transition: transform .55s cubic-bezier(.22,.7,.2,1), color .35s ease; }
+.pi-row:hover .pi-name { transform: translateX(14px); color: #245d7f; }
+.pi-icon { justify-self: end; display: grid; place-items: center; width: clamp(48px, 5vw, 72px); height: clamp(48px, 5vw, 72px); color: #4e8099; opacity: .82; transform: translateY(4px) rotate(-8deg); transition: transform .6s cubic-bezier(.2,.74,.2,1), opacity .4s ease, color .4s ease; }
+.pi-icon svg { width: 72%; height: 72%; animation: pi-float 5.4s ease-in-out infinite; }
+.pi-row:nth-child(3n + 2) .pi-icon svg { animation-delay: -1.8s; }
+.pi-row:nth-child(3n + 3) .pi-icon svg { animation-delay: -3.6s; }
+@keyframes pi-float { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-5px) rotate(2deg); } }
+.pi-row:hover .pi-icon { color: #155778; opacity: 1; transform: translateY(-7px) rotate(7deg) scale(1.13); }
+.pi-end { display: flex; align-items: center; justify-content: space-between; margin-top: 21px; color: #7895a2; font: 400 11px var(--font-geist-mono), monospace; letter-spacing: .1em; }
+.pi-end span:last-child { font-size: 22px; line-height: 1; }
+@media (max-width: 680px) {
+  .product-index { scroll-margin-top: 66px; }
+  .pi-shell { width: calc(100% - 40px); padding: 76px 0 88px; }
+  .pi-heading { font-size: 9px; padding-bottom: 15px; }
+  .pi-row { grid-template-columns: 30px minmax(0, 1fr) 43px; gap: 6px; min-height: 100px; }
+  .pi-number { font-size: 10px; }
+  .pi-name { font-size: clamp(28px, 7.5vw, 41px); line-height: 1.04; letter-spacing: -.06em; }
+  .pi-icon { width: 42px; height: 42px; }
+  .pi-icon svg { width: 30px; height: 30px; }
+  .pi-row:hover .pi-name { transform: translateX(6px); }
+}
+@media (prefers-reduced-motion: reduce) { .pi-row { opacity: 1; transform: none; transition: none; }.pi-row::after,.pi-name,.pi-icon { transition: none; }.pi-icon svg { animation: none; } }
